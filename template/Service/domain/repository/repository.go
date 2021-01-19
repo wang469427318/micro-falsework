@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// #Var_ToTitle# #Var_ToLower#
+// #Var_ToTitle# #Var_ToLower# #Var_ProjectName#
 
 var Path = `/domain/repository`
 var FilePath = `/domain/repository/#Var_ToLower#_repository.go`
@@ -14,7 +14,7 @@ package repository
 
 import (
 	"github.com/jinzhu/gorm"
-	"#Var_ToLower#/domain/model"
+	"#Var_ProjectName#/domain/model"
 )
 type I#Var_ToTitle#Repository interface{
     InitTable() error
@@ -67,9 +67,9 @@ func (u *#Var_ToTitle#Repository) FindAll()(#Var_ToLower#All []model.#Var_ToTitl
 
 `
 
-func Init(projectName string) {
+func Init(projectName,projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.MkDirAll("./" + VarToLower + common.PathOrFilePathFormat(Path, VarToLower))
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower))
+	common.MkDirAll("./" + projectPath + common.PathOrFilePathFormat(Path, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower,projectPath))
 }

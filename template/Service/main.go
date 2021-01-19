@@ -5,18 +5,18 @@ import (
 	"strings"
 )
 
-// #Var_ToTitle# #Var_ToLower#
+// #Var_ToTitle# #Var_ToLower# #Var_ProjectName#
 
 var Path = `/main.go`
-var Code =`
+var Code = `
 package main
 
 import (
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2"
-	"#Var_ToLower#/handler"
+	"#Var_ProjectName#/handler"
 
-	#Var_ToLower# "#Var_ToLower#/proto/#Var_ToLower#"
+	#Var_ToLower# "#Var_ProjectName#/proto/#Var_ToLower#"
 )
 
 func main() {
@@ -38,8 +38,9 @@ func main() {
 	}
 }
 `
-func Init(projectName string) {
+
+func Init(projectName, projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(Path, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(Path, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower, projectPath))
 }

@@ -17,16 +17,12 @@ build:
 
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o #Var_ToLower#-service *.go
 
-.PHONY: test
-test:
-	go test -v ./... -cover
-
 .PHONY: docker
 docker:
 	docker build . -t #Var_ToLower#-service:latest
 `
-func MakeInit(projectName string) {
+func MakeInit(projectName,projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(MakePath, VarToLower), common.CodeFormat(MakeCode, VarToTitle, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(MakePath, VarToLower), common.CodeFormat(MakeCode, VarToTitle, VarToLower,projectPath))
 }

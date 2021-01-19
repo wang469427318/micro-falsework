@@ -19,9 +19,9 @@ type #Var_ToTitle# struct{
 
 var StrGorm = "`gorm:\"primary_key;not_null;auto_increment\"`"
 
-func Init(projectName string) {
+func Init(projectName,projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.MkDirAll("./" + VarToLower + common.PathOrFilePathFormat(Path, VarToLower))
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower))
+	common.MkDirAll("./" + projectPath + common.PathOrFilePathFormat(Path, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower,projectPath))
 }

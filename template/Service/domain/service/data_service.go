@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// #Var_ToTitle# #Var_ToLower#
+// #Var_ToTitle# #Var_ToLower# #Var_ProjectName#
 
 var Path = `/domain/service`
 var FilePath = `/domain/service/#Var_ToLower#_data_service.go`
@@ -14,8 +14,8 @@ package service
 
 
 import (
-	"#Var_ToLower#/domain/model"
-	"#Var_ToLower#/domain/repository"
+	"#Var_ProjectName#/domain/model"
+	"#Var_ProjectName#/domain/repository"
 )
 
 type I#Var_ToTitle#DataService interface {
@@ -64,9 +64,9 @@ func (u *#Var_ToTitle#DataService) FindAll#Var_ToTitle#() ([]model.#Var_ToTitle#
 `
 
 
-func Init(projectName string) {
+func Init(projectName,projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.MkDirAll("./" + VarToLower + common.PathOrFilePathFormat(Path, VarToLower))
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower))
+	common.MkDirAll("./" + projectPath + common.PathOrFilePathFormat(Path, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower,projectPath))
 }

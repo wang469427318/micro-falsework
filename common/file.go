@@ -9,6 +9,7 @@ import (
 
 const VARTOLOWER = "#Var_ToLower#"
 const VARTOTITLE = "#Var_ToTitle#"
+const VARPROJECTNAME = "#Var_ProjectName#"
 
 // 判断文件夹是否存在
 func PathExists(path string) (bool, error) {
@@ -67,9 +68,10 @@ func WriterFile(filePath string, code string) {
 }
 
 // 替换Code中的变量
-func CodeFormat(sourceValue, varToTitle, varToLower string) (code string) {
+func CodeFormat(sourceValue, varToTitle, varToLower,varProjectName string) (code string) {
 	code = strings.ReplaceAll(sourceValue, VARTOLOWER, varToLower)
 	code = strings.ReplaceAll(code, VARTOTITLE, varToTitle)
+	code = strings.ReplaceAll(code, VARPROJECTNAME, varProjectName)
 	return code
 }
 func PathOrFilePathFormat(sourceValue, varToLower string) string {

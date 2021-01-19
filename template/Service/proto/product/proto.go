@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// #Var_ToTitle# #Var_ToLower#
+// #Var_ToTitle# #Var_ToLower# #Var_ProjectName#
 
 var Path = `/proto/#Var_ToLower#/`
 var FilePath = `/proto/#Var_ToLower#/#Var_ToLower#.proto`
@@ -27,9 +27,9 @@ message Response {
 	int32 code = 2;
 }
 `
-func Init(projectName string) {
+func Init(projectName,projectPath string) {
 	VarToTitle := strings.Title(projectName)
 	VarToLower := strings.ToLower(projectName)
-	common.MkDirAll("./" + VarToLower + common.PathOrFilePathFormat(Path, VarToLower))
-	common.WriterFile("./"+VarToLower+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower))
+	common.MkDirAll("./" + projectPath + common.PathOrFilePathFormat(Path, VarToLower))
+	common.WriterFile("./"+projectPath+common.PathOrFilePathFormat(FilePath, VarToLower), common.CodeFormat(Code, VarToTitle, VarToLower,projectPath))
 }

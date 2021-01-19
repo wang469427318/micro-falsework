@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	Template "micro-falsework/template/Service"
 	"micro-falsework/template/Service/domain/model"
@@ -14,21 +15,28 @@ import (
 
 // #Var_ToTitle# #Var_ToLower#
 func main() {
-	pathStr, err := os.Getwd()
+	_pathStr := flag.String("path", "", "请填写路径")
+	flag.Parse()
+	pathStr := *_pathStr
+	projectPath := *_pathStr
+	osPathStr, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	log.Println(osPathStr)
 	log.Println(pathStr)
 	log.Println(strings.LastIndex(pathStr, "/"))
 	log.Println(pathStr[strings.LastIndex(pathStr, "/")+1:])
-	//common.MkDirAll(path)
-	project := "user"
-	model.Init(project)
-	repository.Init(project)
-	service.Init(project)
-	handler.Init(project)
-	proto.Init(project)
-	Template.DockerInit(project)
-	Template.MakeInit(project)
-	Template.Init(project)
+	project := pathStr[strings.LastIndex(pathStr, "/")+1:]
+
+	model.Init(project, projectPath)
+	repository.Init(project, projectPath)
+	service.Init(project, projectPath)
+	handler.Init(project, projectPath)
+	proto.Init(project, projectPath)
+	Template.DockerInit(project, projectPath)
+	Template.MakeInit(project, projectPath)
+	Template.Init(project, projectPath)
+	Template.ModInit(project, projectPath)
 }
