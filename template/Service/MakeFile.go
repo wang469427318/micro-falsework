@@ -10,7 +10,7 @@ var MakePath = `/Makefile`
 var MakeCode=`
 .PHONY: proto
 proto:
-	sudo docker run --rm -v $(shell pwd):$(shell pwd) -w $(shell pwd) -e ICODE=xxxxxx cap1573/cap-protoc -I ./ --micro_out=./ --go_out=./ ./proto/#Var_ToLower#/#Var_ToLower#.proto
+	protoc --plugin=protoc-gen-micro=/go/bin/protoc-gen-micro --proto_path=./ ./proto/#Var_ToLower#/#Var_ToLower#..proto --micro_out ./
 
 .PHONY: build
 build: 
